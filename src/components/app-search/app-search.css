@@ -1,0 +1,7 @@
+.filter__search{
+    width: calc(100% - 8px);
+    height: 35px;
+}
+.filter__search::placeholder{
+    padding-left: 10px;
+}

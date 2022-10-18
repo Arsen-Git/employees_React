@@ -1,0 +1,9 @@
+.app{
+    margin: 0 auto;
+    max-width: 1000px;
+}
+.app__filter{
+    padding: 20px;
+    background-color: rgb(63, 80, 121);
+    border-radius: 5px;
+}
