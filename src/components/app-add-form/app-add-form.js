@@ -1,16 +1,34 @@
 import "./app-add-form.css";
+import { Component } from "react";
 
-const AppAddForm = ()=>{
-    return(
-        <div className="form__container">
-            <h2 className="form__title">Добавьте нового сотрудника!</h2>
-            <form action="#" className="form">
-                <input className="form__input" type="text" name="name" id="name" placeholder="Введите имя..."/>
-                <input className="form__input" type="number" name="salary" id="salary" placeholder="Введите зарплату..."/>
-                <button className="form__btn" type="submit">Добавить</button>
-            </form>
-        </div>
-    )
+class AppAddForm extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            name: "",
+            salary: ""
+        }
+    }
+
+    onValueChange = (e)=>{
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    render(){
+        const {name, salary} = this.state;
+        return(
+            <div className="form__container">
+                <h2 className="form__title">Добавьте нового сотрудника!</h2>
+                <form action="#" className="form">
+                    <input onChange={this.onValueChange} className="form__input" type="text" value={name} name="name" id="name" placeholder="Введите имя..."/>
+                    <input onChange={this.onValueChange} className="form__input" type="number" value={salary} name="salary" id="salary" placeholder="Введите зарплату..."/>
+                    <button className="form__btn" type="submit">Добавить</button>
+                </form>
+            </div>
+        )
+    }
 }
 
 export default AppAddForm;
