@@ -1,35 +1,29 @@
-import "./app-employee-list-item.css"
-import { Component } from "react";
+import "./app-employee-list-item.css";
 
-class AppEmployeeItem extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            increase: this.props.increase
-        }
-    }
+const AppEmployeeItem = (props) => {
+  const { name, salary, onDelete, onToggleProp, increase } = props;
+  const className = increase
+    ? "employee__container increase"
+    : "employee__container";
 
-    onChange = () => {
-        this.setState(({increase}) => ({
-            increase: !increase
-        }))
-    }
-
-    render(){
-        const {name, salary, onDelete} = this.props;
-        const {increase} = this.state;
-        const className = increase?"employee__container increase":"employee__container";
-        return(
-            <li className={className}>
-                <p className="employee__name">{name}</p>
-                <p className="employee__salary">{salary + "$"}</p>
-                <div className="employee__btns">
-                    <button onClick={this.onChange} className="btn btn__increase">Increase</button>
-                    <button onClick={onDelete} className="btn btn__delete">Delete</button>
-                </div>
-            </li>
-        )
-    }
-}
+  return (
+    <li className={className}>
+      <p className="employee__name">{name}</p>
+      <p className="employee__salary">{salary + "$"}</p>
+      <div className="employee__btns">
+        <button
+          onClick={onToggleProp}
+          className="btn btn__increase"
+          data-toggle="increase"
+        >
+          Increase
+        </button>
+        <button onClick={onDelete} className="btn btn__delete">
+          Delete
+        </button>
+      </div>
+    </li>
+  );
+};
 
 export default AppEmployeeItem;
