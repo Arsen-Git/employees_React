@@ -5,7 +5,7 @@ class AppEmployeeItem extends Component {
     constructor(props){
         super(props);
         this.state = {
-            increase: false
+            increase: this.props.increase
         }
     }
 
@@ -16,7 +16,7 @@ class AppEmployeeItem extends Component {
     }
 
     render(){
-        const {name, salary} = this.props;
+        const {name, salary, onDelete} = this.props;
         const {increase} = this.state;
         const className = increase?"employee__container increase":"employee__container";
         return(
@@ -25,7 +25,7 @@ class AppEmployeeItem extends Component {
                 <p className="employee__salary">{salary + "$"}</p>
                 <div className="employee__btns">
                     <button onClick={this.onChange} className="btn btn__increase">Increase</button>
-                    <button className="btn btn__delete">Delete</button>
+                    <button onClick={onDelete} className="btn btn__delete">Delete</button>
                 </div>
             </li>
         )

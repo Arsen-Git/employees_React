@@ -2,12 +2,12 @@ import AppEmployeeItem from "../app-employees-list-item/app-employees-list-item"
 
 import "./app-employees-list.css"
 
-const AppEmployeeList = ({data})=>{
+const AppEmployeeList = ({data, onDelete})=>{
 
     const items = data.map(item=>{
         const {id, ...itemProps} = item;
         return(
-            <AppEmployeeItem key={id} {...itemProps}/>
+            <AppEmployeeItem onDelete={()=>onDelete(id)} key={id} {...itemProps}/>
         )
     })
 
