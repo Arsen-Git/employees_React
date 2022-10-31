@@ -21,9 +21,25 @@ export default class App extends Component {
         { name: "Danil R.", salary: 450, increase: false, id: 6 },
       ],
       search: "",
+      filter: "All",
     };
     this.maxId = 6;
   }
+
+  filterEmpl = (data, filter) => {
+    switch (filter) {
+      case "MoreThan1000":
+        return data.filter((item) => item.salary > 1000);
+      case "Increase":
+        return data.filter((item) => item.increase);
+      default:
+        return data;
+    }
+  };
+
+  onEmplFilter = (filter) => {
+    this.setState({ filter });
+  };
 
   searchEmloyee = (data, search) => {
     if (search === "") {
@@ -69,14 +85,17 @@ export default class App extends Component {
   };
 
   render() {
-    const { data, search } = this.state;
-    const visibleData = this.searchEmloyee(data, search);
+    const { data, search, filter } = this.state;
+    const visibleData = this.filterEmpl(
+      this.searchEmloyee(data, search),
+      filter
+    );
     return (
       <div className="app">
         <AppHeader data={data} />
         <div className="app__filter">
           <AppSearch onEmplSearch={this.onEmplSearch} />
-          <AppTabs />
+          <AppTabs onEmplFilter={this.onEmplFilter} filter={filter} />
         </div>
         <AppEmployeeList
           onToggleProp={this.onToggleProp}
