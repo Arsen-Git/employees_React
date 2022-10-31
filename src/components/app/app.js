@@ -20,9 +20,21 @@ export default class App extends Component {
         { name: "Ihor H.", salary: 1900, increase: true, id: 5 },
         { name: "Danil R.", salary: 450, increase: false, id: 6 },
       ],
+      search: "",
     };
     this.maxId = 6;
   }
+
+  searchEmloyee = (data, search) => {
+    if (search === "") {
+      return data;
+    }
+    return data.filter((item) => item.name.includes(search));
+  };
+
+  onEmplSearch = (search) => {
+    this.setState({ search });
+  };
 
   onToggleProp = (id, prop) => {
     this.setState(({ data }) => ({
@@ -57,18 +69,19 @@ export default class App extends Component {
   };
 
   render() {
-    const { data } = this.state;
+    const { data, search } = this.state;
+    const visibleData = this.searchEmloyee(data, search);
     return (
       <div className="app">
         <AppHeader data={data} />
         <div className="app__filter">
-          <AppSearch />
+          <AppSearch onEmplSearch={this.onEmplSearch} />
           <AppTabs />
         </div>
         <AppEmployeeList
           onToggleProp={this.onToggleProp}
           onDelete={this.deleteItem}
-          data={data}
+          data={visibleData}
         />
         <AppAddForm onCreate={this.createItem} />
       </div>
