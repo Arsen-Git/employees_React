@@ -60,7 +60,7 @@ export default class App extends Component {
     const { data } = this.state;
     return (
       <div className="app">
-        <AppHeader />
+        <AppHeader data={data} />
         <div className="app__filter">
           <AppSearch />
           <AppTabs />
